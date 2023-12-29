@@ -24,7 +24,7 @@ class SquareTextIconButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       customBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30 * (size / 120)),
       ),
       child: Container(
         height: size,
@@ -32,7 +32,7 @@ class SquareTextIconButton extends StatelessWidget {
         alignment: Alignment.center,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(30 * (size / 120)),
           color: CColors.white,
           boxShadow: [
             BoxShadow(
