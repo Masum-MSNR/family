@@ -91,24 +91,28 @@ class SquareTextIconButton extends StatelessWidget {
                         child: SizedBox(
                           height: size,
                           width: size,
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  icon,
-                                  size: size / 2,
-                                ),
-                                Text(
-                                  text,
-                                  style: TextStyle(
-                                    fontSize: 22 * (size / 120),
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'poppins',
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    icon,
+                                    size: size / 2.5,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    text,
+                                    style: TextStyle(
+                                      fontSize: 18 * (size / 120),
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'poppins',
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
