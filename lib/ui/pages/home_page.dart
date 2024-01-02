@@ -1,7 +1,6 @@
 import 'package:family/consts/c_colors.dart';
 import 'package:family/ui/widgets/item_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/home_page_controller.dart';
@@ -41,14 +40,28 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return ItemTile(
               item: _controller.itemLists[index],
-              onEdit: () {
-                _controller.itemLists[index].isEditing = true;
+              onDone: (value) {
+                _controller.itemLists[index].isDone = value;
                 _controller.itemLists.refresh();
               },
-              onDone: () {
+              onPriceTap: () {
+                _controller.itemLists[index].isPriceEditing = true;
+                _controller.itemLists.refresh();
+              },
+              onPriceEditDone: () {
                 _controller.itemLists[index].itemPrice =
                     _controller.itemLists[index].itemPriceController!.text;
-                _controller.itemLists[index].isEditing = false;
+                _controller.itemLists[index].isPriceEditing = false;
+                _controller.itemLists.refresh();
+              },
+              onNameTap: () {
+                _controller.itemLists[index].isNameEditing = true;
+                _controller.itemLists.refresh();
+              },
+              onNameEditDone: () {
+                _controller.itemLists[index].itemName =
+                    _controller.itemLists[index].itemNameController!.text;
+                _controller.itemLists[index].isNameEditing = false;
                 _controller.itemLists.refresh();
               },
             );
