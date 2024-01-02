@@ -2,17 +2,9 @@ name: Build Flutter Android APK and Deploy to Internal Track
 
 on: 
   workflow_call:
-  # push:
-  #   branches:
-  #     - main  # Adjust the branch name as needed
-#  on merge
-
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
-
 
 jobs:
 
