@@ -3,7 +3,7 @@ description: "A family project."
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.2+3
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   widget_mask: ^1.0.0+0
+  flutter_slidable: ^3.0.1
 
 dev_dependencies:
   flutter_test:

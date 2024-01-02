@@ -40,7 +40,7 @@ class _SplashPageState extends State<SplashPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image(
+                      const Image(
                         image: AssetImage('assets/images/icon.png'),
                         height: 100,
                       ),
