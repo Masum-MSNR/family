@@ -2,16 +2,20 @@ import 'package:family/consts/c_colors.dart';
 import 'package:family/ui/widgets/square_text_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:widget_mask/widget_mask.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+import '../../utils/prefs.dart';
+import 'home_page.dart';
+
+class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(
@@ -109,14 +113,22 @@ class _SplashPageState extends State<SplashPage> {
                         color: CColors.cyan,
                         icon: Icons.male,
                         text: 'Husband',
-                        onTap: () {},
+                        onTap: () {
+                          Prefs.isMale = true;
+                          Prefs.isFirstTime = false;
+                          Get.offAll(() => const HomePage());
+                        },
                       ),
                       SquareTextIconButton(
                         size: 140,
                         color: CColors.red,
                         icon: Icons.female,
                         text: 'Wife',
-                        onTap: () {},
+                        onTap: () {
+                          Prefs.isMale = false;
+                          Prefs.isFirstTime = false;
+                          Get.offAll(() => const HomePage());
+                        },
                       ),
                     ],
                   ),
