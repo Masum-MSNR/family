@@ -1,4 +1,4 @@
-import 'package:family/models/shopping_model.dart';
+import 'package:family/models/item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -9,13 +9,21 @@ class ItemTile extends StatefulWidget {
   const ItemTile({
     super.key,
     required this.item,
-    required this.onEdit,
     required this.onDone,
+    required this.onPriceTap,
+    required this.onPriceEditDone,
+    required this.onNameTap,
+    required this.onNameEditDone,
+    required this.onDelete,
   });
 
-  final ShoppingModel item;
-  final VoidCallback onEdit;
-  final VoidCallback onDone;
+  final ItemModel item;
+  final Function(bool?) onDone;
+  final VoidCallback onPriceTap;
+  final VoidCallback onPriceEditDone;
+  final VoidCallback onNameTap;
+  final VoidCallback onNameEditDone;
+  final VoidCallback onDelete;
 
   @override
   State<ItemTile> createState() => _ItemTileState();
@@ -39,11 +47,13 @@ class _ItemTileState extends State<ItemTile> {
       ),
       clipBehavior: Clip.antiAlias,
       child: Slidable(
-        startActionPane: ActionPane(
+        endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) {
+                widget.onDelete.call();
+              },
               backgroundColor: CColors.red,
               foregroundColor: CColors.white,
               icon: Icons.delete,
@@ -64,18 +74,62 @@ class _ItemTileState extends State<ItemTile> {
                     Checkbox(
                       activeColor: CColors.cyan,
                       checkColor: CColors.white,
-                      value: true,
-                      onChanged: (value) {},
+                      value: widget.item.isDone,
+                      onChanged: widget.onDone,
                     ),
                     Expanded(
-                      child: Text(
-                        widget.item.itemName!,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: CColors.black,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
-                        ),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        child: widget.item.isNameEditing == false
+                            ? Align(
+                                alignment: Alignment.centerLeft,
+                                child: InkWell(
+                                  onTap: widget.onNameTap,
+                                  child: Text(
+                                    widget.item.itemName!,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      color: CColors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Row(
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller:
+                                          widget.item.itemNameController!,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        isCollapsed: true,
+                                        hintStyle: TextStyle(
+                                          color: CColors.black.withOpacity(0.5),
+                                          fontFamily: 'Poppins',
+                                        ),
+                                        border: InputBorder.none,
+                                      ),
+                                      style: const TextStyle(
+                                        color: CColors.black,
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                      autofocus: true,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  InkWell(
+                                    onTap: widget.onNameEditDone,
+                                    customBorder: const CircleBorder(),
+                                    child: const Icon(
+                                      Icons.check,
+                                      color: CColors.cyan,
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -86,9 +140,9 @@ class _ItemTileState extends State<ItemTile> {
                 padding: const EdgeInsets.only(right: 16),
                 child: MoneyWidget(
                   price: widget.item.itemPrice!,
-                  isEditing: widget.item.isEditing!,
-                  onEdit: widget.onEdit,
-                  onDone: widget.onDone,
+                  isEditing: widget.item.isPriceEditing!,
+                  onEdit: widget.onPriceTap,
+                  onDone: widget.onPriceEditDone,
                   controller: widget.item.itemPriceController!,
                 ),
               ),

@@ -1,8 +1,8 @@
-import 'package:family/models/shopping_model.dart';
+import 'package:family/models/item_model.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
-  var itemLists = <ShoppingModel>[].obs;
+  var itemLists = <ItemModel>[].obs;
 
   @override
   void onInit() {
@@ -11,30 +11,47 @@ class HomePageController extends GetxController {
   }
 
   addDemoItems() {
-    itemLists.add(ShoppingModel.fromJson({
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
       'itemName': 'Mango',
       'itemPrice': '100',
     }));
-    itemLists.add(ShoppingModel.fromJson({
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
       'itemName': 'Apple',
       'itemPrice': '200',
     }));
-    itemLists.add(ShoppingModel.fromJson({
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
       'itemName': 'Orange',
       'itemPrice': '300',
     }));
-    itemLists.add(ShoppingModel.fromJson({
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
       'itemName': 'Banana',
       'itemPrice': '400',
     }));
-    itemLists.add(ShoppingModel.fromJson({
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
       'itemName': 'Grapes',
       'itemPrice': '500',
     }));
+  }
+
+  addItem(String text) {
+    if (text.isEmpty) return false;
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+      'itemName': text,
+      'itemPrice': '0',
+    }));
+    itemLists.refresh();
+    return true;
   }
 }

@@ -1,30 +1,40 @@
 import 'package:flutter/material.dart';
 
-class ShoppingModel {
+class ItemModel {
+  bool? isDone;
   int? timestamp;
   String? itemName;
   String? itemPrice;
-  bool? isEditing = false;
+  bool? isPriceEditing = false;
+  bool? isNameEditing = false;
   TextEditingController? itemPriceController;
+  TextEditingController? itemNameController;
 
-  ShoppingModel({
+  ItemModel({
+    this.isDone,
     this.timestamp,
     this.itemName,
     this.itemPrice,
-    this.isEditing,
+    this.isPriceEditing,
+    this.isNameEditing,
+    this.itemNameController,
     this.itemPriceController,
   });
 
-  ShoppingModel.fromJson(Map<String, dynamic> json) {
+  ItemModel.fromJson(Map<String, dynamic> json) {
+    isDone = json['isDone'];
     timestamp = json['timestamp'];
     itemName = json['itemName'];
     itemPrice = json['itemPrice'];
-    isEditing = false;
+    isPriceEditing = false;
     itemPriceController = TextEditingController(text: itemPrice ?? '');
+    isNameEditing = false;
+    itemNameController = TextEditingController(text: itemName ?? '');
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['isDone'] = isDone;
     data['timestamp'] = timestamp;
     data['itemName'] = itemName;
     data['itemPrice'] = itemPrice;
