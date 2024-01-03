@@ -42,4 +42,16 @@ class HomePageController extends GetxController {
       'itemPrice': '500',
     }));
   }
+
+  addItem(String text) {
+    if (text.isEmpty) return false;
+    itemLists.add(ItemModel.fromJson({
+      'isDone': false,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+      'itemName': text,
+      'itemPrice': '0',
+    }));
+    itemLists.refresh();
+    return true;
+  }
 }

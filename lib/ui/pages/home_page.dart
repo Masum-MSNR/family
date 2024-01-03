@@ -1,5 +1,6 @@
 import 'package:family/consts/c_colors.dart';
 import 'package:family/ui/widgets/item_tile.dart';
+import 'package:family/ui/widgets/popups/add_item_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,13 +65,35 @@ class _HomePageState extends State<HomePage> {
                 _controller.itemLists[index].isNameEditing = false;
                 _controller.itemLists.refresh();
               },
+              onDelete: () {
+                _controller.itemLists.removeAt(index);
+                _controller.itemLists.refresh();
+              },
             );
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: CColors.cyan,
-        onPressed: () {},
+        onPressed: () {
+          final itemNameController = TextEditingController();
+          Get.bottomSheet(AddItemSheet(
+            controller: itemNameController,
+            onTap: () {
+              if (_controller.addItem(itemNameController.text)) {
+                Get.back();
+              } else {
+                Get.showSnackbar(
+                  const GetSnackBar(
+                    message: 'Please enter item name',
+                    backgroundColor: CColors.navyBlue,
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+          ));
+        },
         child: const Icon(
           Icons.add,
           color: CColors.white,

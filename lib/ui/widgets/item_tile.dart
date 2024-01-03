@@ -14,6 +14,7 @@ class ItemTile extends StatefulWidget {
     required this.onPriceEditDone,
     required this.onNameTap,
     required this.onNameEditDone,
+    required this.onDelete,
   });
 
   final ItemModel item;
@@ -22,6 +23,7 @@ class ItemTile extends StatefulWidget {
   final VoidCallback onPriceEditDone;
   final VoidCallback onNameTap;
   final VoidCallback onNameEditDone;
+  final VoidCallback onDelete;
 
   @override
   State<ItemTile> createState() => _ItemTileState();
@@ -45,11 +47,13 @@ class _ItemTileState extends State<ItemTile> {
       ),
       clipBehavior: Clip.antiAlias,
       child: Slidable(
-        startActionPane: ActionPane(
+        endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) {
+                widget.onDelete.call();
+              },
               backgroundColor: CColors.red,
               foregroundColor: CColors.white,
               icon: Icons.delete,
