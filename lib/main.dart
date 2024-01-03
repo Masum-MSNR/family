@@ -1,8 +1,12 @@
 import 'package:family/ui/pages/home_page.dart';
+import 'package:family/ui/pages/on_boarding_page.dart';
+import 'package:family/utils/prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Prefs.init();
   runApp(const MyApp());
 }
 
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: Prefs.isFirstTime ? const OnBoardingPage() : const HomePage(),
     );
   }
 }
