@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "926602237770",
+    "project_id": "family-6a821",
+    "storage_bucket": "family-6a821.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926602237770:android:f60d3fbb026283b27313b3",
+        "android_client_info": {
+          "package_name": "dev.almasum.family"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcskmx83cfbNaJEuiUoXczVTlu92obaUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
