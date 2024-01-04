@@ -1,6 +1,8 @@
 import 'package:family/consts/c_colors.dart';
 import 'package:family/ui/widgets/custom_button.dart';
+import 'package:family/utils/card_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddSheet extends StatefulWidget {
@@ -45,9 +47,12 @@ class _AddSheetState extends State<AddSheet> {
                 ),
                 child: TextField(
                   controller: widget.controller,
+                  inputFormatters: [KeyFormatter()],
+                  maxLength: 19,
                   decoration: InputDecoration(
                     isDense: true,
                     isCollapsed: true,
+                    counterText: '',
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 16,

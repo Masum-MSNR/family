@@ -1,5 +1,9 @@
 import 'package:family/consts/c_colors.dart';
+import 'package:family/database/firestore_handler.dart';
 import 'package:family/ui/widgets/fancy_button.dart';
+import 'package:family/utils/f_snack_bar.dart';
+import 'package:family/utils/key_generator.dart';
+import 'package:family/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -111,9 +115,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   icon: Icons.male,
                   text: 'New List',
                   onTap: () {
-                    Prefs.user = 'father';
-                    Prefs.isFirstTime = false;
-                    Get.offAll(() => const HomePage());
+                    KeyGenerator.generate().then((value) async {
+                      await Loading.show('Creating list');
+                      var res = await FirestoreHandler.createNewList(value);
+                      Loading.hide();
+                      if (res) {
+                        Prefs.isFirstTime = false;
+                        Prefs.listCode = value;
+                        Get.offAll(() => const HomePage());
+                      } else {
+                        FSnackBar.show(
+                          message: 'Something went wrong',
+                          duration: 2,
+                        );
+                      }
+                    });
                   },
                 ),
                 const SizedBox(height: 20),
@@ -129,7 +145,31 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       hint: 'Enter code',
                       controller: listCodeController,
                       onTap: () {
-                        Get.back();
+                        RegExp keyFormatRegExp = RegExp(
+                            r'^[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}$');
+                        if (!keyFormatRegExp
+                            .hasMatch(listCodeController.text)) {
+                          FSnackBar.show(
+                            message: 'Invalid code format',
+                            duration: 2,
+                          );
+                          return;
+                        }
+                        Loading.show('Checking list existence');
+                        FirestoreHandler.checkListExist(listCodeController.text)
+                            .then((value) {
+                          Loading.hide();
+                          if (value) {
+                            Prefs.isFirstTime = false;
+                            Prefs.listCode = listCodeController.text;
+                            Get.offAll(() => const HomePage());
+                          } else {
+                            FSnackBar.show(
+                              message: 'List not found',
+                              duration: 2,
+                            );
+                          }
+                        });
                       },
                     ));
                   },
