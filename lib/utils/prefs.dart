@@ -19,7 +19,7 @@ abstract class Prefs {
 
   static bool get isFirstTime => _prefs.getBool('isFirstTime') ?? true;
 
-  static set isMale(bool value) => _prefs.setBool('isMale', value);
+  static set user(String value) => _prefs.setString('user', value);
 
-  static bool get isMale => _prefs.getBool('isMale') ?? true;
+  static String get user => _prefs.getString('user') ?? '';
 }

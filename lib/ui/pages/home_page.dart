@@ -1,10 +1,11 @@
 import 'package:family/consts/c_colors.dart';
-import 'package:family/ui/widgets/item_tile.dart';
-import 'package:family/ui/widgets/popups/add_item_sheet.dart';
+import 'package:family/ui/widgets/custom_outlined_button.dart';
+import 'package:family/ui/widgets/popups/add_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/home_page_controller.dart';
+import '../widgets/item_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,9 +22,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CColors.navyBlue,
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        leading: const Icon(
+          Icons.shopping_bag_outlined,
+          color: CColors.white,
+        ),
         title: const Text(
           'Shopping List',
           style: TextStyle(
+            fontWeight: FontWeight.w500,
             color: CColors.white,
             fontFamily: 'Poppins',
           ),
@@ -74,10 +82,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: CColors.cyan,
+        backgroundColor: CColors.navyBlue,
         onPressed: () {
           final itemNameController = TextEditingController();
-          Get.bottomSheet(AddItemSheet(
+          Get.bottomSheet(AddSheet(
+            buttonText: 'Add',
+            hint: 'Item Name',
             controller: itemNameController,
             onTap: () {
               if (_controller.addItem(itemNameController.text)) {

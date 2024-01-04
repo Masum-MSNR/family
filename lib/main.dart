@@ -1,4 +1,4 @@
-import 'package:family/ui/pages/home_page.dart';
+import 'package:family/consts/c_colors.dart';
 import 'package:family/ui/pages/on_boarding_page.dart';
 import 'package:family/utils/prefs.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +19,11 @@ class MyApp extends StatelessWidget {
       title: 'Family',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: CColors.navyBlue),
         useMaterial3: true,
       ),
-      home: Prefs.isFirstTime ? const OnBoardingPage() : const HomePage(),
+      // home: Prefs.isFirstTime ? const OnBoardingPage() : const HomePage(),
+      home: const OnBoardingPage(),
     );
   }
 }
