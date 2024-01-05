@@ -7,5 +7,6 @@ class CColors {
   static const Color navyBlue = Color(0xff15284f);
   static const Color white = Color(0xffffffff);
   static const Color black = Color(0xff000000);
+  static const Color grey = Color(0xff9e9e9e);
   static const Color transparent = Colors.transparent;
 }

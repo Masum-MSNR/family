@@ -3,7 +3,7 @@ description: "A family project."
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.1.0+6
+version: 1.1.1+7
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   device_info_plus: ^9.1.1
   crypto: ^3.0.3
+  share_plus: ^7.2.1
 
 dev_dependencies:
   flutter_test:

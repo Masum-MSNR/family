@@ -3,6 +3,7 @@ import 'package:family/ui/widgets/popups/add_sheet.dart';
 import 'package:family/utils/prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../controllers/home_page_controller.dart';
 import '../widgets/item_tile.dart';
@@ -42,10 +43,10 @@ class _HomePageState extends State<HomePage> {
                 fontSize: 18,
               ),
             ),
-            SizedBox(height: 1),
+            const SizedBox(height: 1),
             Text(
-              '${Prefs.listCode}',
-              style: TextStyle(
+              Prefs.listCode,
+              style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 color: CColors.white,
                 fontFamily: 'Poppins',
@@ -56,10 +57,16 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              //share in socials using share package link
+              Share.share(
+                '${Prefs.listCode} is your family shopping list code. '
+                'You can join your family shopping list using this code.',
+              );
+            },
             customBorder: const CircleBorder(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
+            child: const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 8,
               ),
