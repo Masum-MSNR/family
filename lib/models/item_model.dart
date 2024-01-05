@@ -32,6 +32,17 @@ class ItemModel {
     itemNameController = TextEditingController(text: itemName ?? '');
   }
 
+  ItemModel.fromOldState(Map<String, dynamic> newItem, ItemModel oldState) {
+    isDone = newItem['isDone'];
+    timestamp = newItem['timestamp'];
+    itemName = newItem['itemName'];
+    itemPrice = newItem['itemPrice'];
+    isPriceEditing = oldState.isPriceEditing;
+    itemPriceController = oldState.itemPriceController;
+    isNameEditing = oldState.isNameEditing;
+    itemNameController = oldState.itemNameController;
+  }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['isDone'] = isDone;

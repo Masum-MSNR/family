@@ -2,7 +2,6 @@ import 'package:family/consts/c_colors.dart';
 import 'package:family/ui/widgets/custom_button.dart';
 import 'package:family/utils/card_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddSheet extends StatefulWidget {
@@ -12,12 +11,14 @@ class AddSheet extends StatefulWidget {
     required this.controller,
     required this.hint,
     required this.buttonText,
+    this.formatted = false,
   });
 
   final String hint;
   final String buttonText;
   final VoidCallback onTap;
   final TextEditingController controller;
+  final bool formatted;
 
   @override
   State<AddSheet> createState() => _AddSheetState();
@@ -47,8 +48,8 @@ class _AddSheetState extends State<AddSheet> {
                 ),
                 child: TextField(
                   controller: widget.controller,
-                  inputFormatters: [KeyFormatter()],
-                  maxLength: 19,
+                  inputFormatters: widget.formatted ? [KeyFormatter()] : [],
+                  maxLength: widget.formatted ? 19 : null,
                   decoration: InputDecoration(
                     isDense: true,
                     isCollapsed: true,

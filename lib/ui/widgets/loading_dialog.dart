@@ -1,7 +1,5 @@
 import 'package:family/consts/c_colors.dart';
-import 'package:family/ui/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class LoadingDialog extends StatelessWidget {
   const LoadingDialog({
@@ -31,15 +29,15 @@ class LoadingDialog extends StatelessWidget {
                 color: CColors.transparent,
                 child: Column(
                   children: [
-                    CircularProgressIndicator(
+                    const CircularProgressIndicator(
                       color: CColors.cyan,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
                     Text(
-                      '${message}...',
-                      style: TextStyle(
+                      '$message...',
+                      style: const TextStyle(
                         color: CColors.cyan,
                         fontSize: 16,
                         fontFamily: 'Poppins',

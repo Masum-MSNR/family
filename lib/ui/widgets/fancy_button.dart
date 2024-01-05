@@ -98,7 +98,7 @@ class FancyButton extends StatelessWidget {
                                   children: [
                                     Text(
                                       text,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
                                         fontFamily: 'poppins',

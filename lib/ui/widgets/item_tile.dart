@@ -72,7 +72,7 @@ class _ItemTileState extends State<ItemTile> {
                 child: Row(
                   children: [
                     Checkbox(
-                      activeColor: CColors.cyan,
+                      activeColor: CColors.grey,
                       checkColor: CColors.white,
                       value: widget.item.isDone,
                       onChanged: widget.onDone,
@@ -85,13 +85,16 @@ class _ItemTileState extends State<ItemTile> {
                                 alignment: Alignment.centerLeft,
                                 child: InkWell(
                                   onTap: widget.onNameTap,
-                                  child: Text(
-                                    widget.item.itemName!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      color: CColors.black,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Poppins',
+                                  child: Opacity(
+                                    opacity: widget.item.isDone! ? 0.5 : 1,
+                                    child: Text(
+                                      widget.item.itemName!,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        color: CColors.black,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins',
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -116,6 +119,9 @@ class _ItemTileState extends State<ItemTile> {
                                         fontFamily: 'Poppins',
                                         fontSize: 14,
                                       ),
+                                      onSubmitted: (value) {
+                                        widget.onNameEditDone.call();
+                                      },
                                       autofocus: true,
                                     ),
                                   ),

@@ -70,6 +70,9 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                         fontFamily: 'Poppins',
                         fontSize: 14,
                       ),
+                      onSubmitted: (value) {
+                        widget.onDone.call();
+                      },
                       autofocus: true,
                     ),
                   ),
