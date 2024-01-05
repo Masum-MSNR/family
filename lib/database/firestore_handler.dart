@@ -30,21 +30,22 @@ abstract class FirestoreHandler {
         .set(item.toJson());
   }
 
-  static updateListItem(String listCode, ItemModel item) async {
+  static updateListItem(
+      String listCode, String key, Map<String, dynamic> values) async {
     await _firestore
         .collection(listTable)
         .doc(listCode)
         .collection(listCollection)
-        .doc(item.timestamp.toString())
-        .update(item.toJson());
+        .doc(key)
+        .update(values);
   }
 
-  static deleteListItem(String listCode, ItemModel item) async {
+  static deleteListItem(String listCode, String key) async {
     await _firestore
         .collection(listTable)
         .doc(listCode)
         .collection(listCollection)
-        .doc(item.timestamp.toString())
+        .doc(key)
         .delete();
   }
 

@@ -143,6 +143,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     Get.bottomSheet(AddSheet(
                       buttonText: 'Continue',
                       hint: 'Enter code',
+                      formatted: true,
                       controller: listCodeController,
                       onTap: () {
                         RegExp keyFormatRegExp = RegExp(
