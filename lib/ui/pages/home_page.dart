@@ -80,55 +80,57 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Obx(
-            () => ListView.builder(
-              padding: const EdgeInsets.only(
-                top: 16,
-                bottom: 100,
-                right: 16,
-                left: 16,
+          Expanded(
+            child: Obx(
+              () => ListView.builder(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  bottom: 100,
+                  right: 16,
+                  left: 16,
+                ),
+                shrinkWrap: true,
+                itemCount: _controller.itemLists.length,
+                itemBuilder: (context, index) {
+                  return ItemTile(
+                    item: _controller.itemLists[index],
+                    onDone: (value) async {
+                      // _controller.itemLists[index].isDone = value;
+                      // _controller.itemLists.refresh();
+                      await _controller.updateItem(index, {
+                        'isDone': value,
+                      });
+                    },
+                    onPriceTap: () {
+                      _controller.itemLists[index].isPriceEditing = true;
+                      _controller.itemLists.refresh();
+                    },
+                    onPriceEditDone: () async {
+                      _controller.itemLists[index].isPriceEditing = false;
+                      _controller.itemLists.refresh();
+                      await _controller.updateItem(index, {
+                        'itemPrice': _controller
+                            .itemLists[index].itemPriceController!.text,
+                      });
+                    },
+                    onNameTap: () {
+                      _controller.itemLists[index].isNameEditing = true;
+                      _controller.itemLists.refresh();
+                    },
+                    onNameEditDone: () async {
+                      _controller.itemLists[index].isNameEditing = false;
+                      _controller.itemLists.refresh();
+                      await _controller.updateItem(index, {
+                        'itemName': _controller
+                            .itemLists[index].itemNameController!.text,
+                      });
+                    },
+                    onDelete: () async {
+                      await _controller.deleteItem(index);
+                    },
+                  );
+                },
               ),
-              shrinkWrap: true,
-              itemCount: _controller.itemLists.length,
-              itemBuilder: (context, index) {
-                return ItemTile(
-                  item: _controller.itemLists[index],
-                  onDone: (value) async {
-                    // _controller.itemLists[index].isDone = value;
-                    // _controller.itemLists.refresh();
-                    await _controller.updateItem(index, {
-                      'isDone': value,
-                    });
-                  },
-                  onPriceTap: () {
-                    _controller.itemLists[index].isPriceEditing = true;
-                    _controller.itemLists.refresh();
-                  },
-                  onPriceEditDone: () async {
-                    _controller.itemLists[index].isPriceEditing = false;
-                    _controller.itemLists.refresh();
-                    await _controller.updateItem(index, {
-                      'itemPrice': _controller
-                          .itemLists[index].itemPriceController!.text,
-                    });
-                  },
-                  onNameTap: () {
-                    _controller.itemLists[index].isNameEditing = true;
-                    _controller.itemLists.refresh();
-                  },
-                  onNameEditDone: () async {
-                    _controller.itemLists[index].isNameEditing = false;
-                    _controller.itemLists.refresh();
-                    await _controller.updateItem(index, {
-                      'itemName':
-                          _controller.itemLists[index].itemNameController!.text,
-                    });
-                  },
-                  onDelete: () async {
-                    await _controller.deleteItem(index);
-                  },
-                );
-              },
             ),
           ),
         ],
