@@ -1,0 +1,11 @@
+**slip feature [new]
+    new button for this feature
+        ->View Slip----------->Nice looking ui with items and sum of cost
+
+        ->Create New---------->Slip Title
+                        ------>Date
+                        ------>Current Item list to add in slip
+                        ------>Sava
+
+**add to slip [old]
+    slide right to add to slip for list item
